@@ -2,22 +2,71 @@
 <html lang="en">
     <head>
 	<meta charset="utf-8">
-
-    <!-- Dice a usar la versión más moderna del renderizado disponible ("edge") -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Gestor de presupuesto</title>
     </head>
     <body>
-	<!-- Capas contenedoras para mostrar los datos de la aplicación -->
+	
+        <template id="gastoPlantilla">
+	    <style>
+	     .oculto {
+		 display: none;
+		 }
+		 
+	    </style>
+
+
+	    <div class="gasto">
+		<div class="gasto-descripcion"></div>
+		<div class="gasto-fecha"></div>
+		<div class="gasto-valor"></div>
+		<div class="gasto-etiquetas"></div>
+		<div>
+		    <button class="gasto-editar-formulario" type="button">Editar</button>
+		    <button class="gasto-borrar" type="button">Borrar</button>
+		</div>
+
+		<form class="oculto">
+            <div class="form-control">
+				<label for="descripcion">Descripción</label>
+				<input type="text" name="descripcion" id="descripcion">
+		    </div>
+
+		    <div class="form-control">
+				<label for="valor">Valor</label>
+				<input type="number" name="valor" id="valor" step="0.01">
+		    </div>
+
+		    <div class="form-control">
+				<label for="fecha">Fecha</label>
+				<input type="date" name="fecha" id="fecha">
+			</div>
+
+		    <div class="form-control">
+				<label for="etiquetas">Etiquetas</label>
+				<input type="text" name="etiquetas" id="etiquetas">
+		    </div>
+
+		    <button id="enviar" type="submit">Enviar</button>
+		    <button id="cancelar" class="cancelar" type="button">Cancelar</button>
+		</form>
+
+        </template>
+
+		
 	<div id="aplicacion">
 	    <div id="total">
+
 	    </div>
 	    <div id="formcreacion">
+
 	    </div>
 	    <div id="listado">
+
 	    </div>
 	</div>
-    
-	<script type="module" src="./js/gestionPresupuestoWebV1.js"></script>
+
+	<script type="module" src="./js/gestionPresupuestoWebV2.js"></script>
     </body>
 </html>
