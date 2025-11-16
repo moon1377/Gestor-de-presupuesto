@@ -150,6 +150,25 @@ function agruparGastos(periodo, etiquetas = [], fechaDesde, fechaHasta) {
   return resultado;
 }
 
+function cargarGastosDesdeLista(lista) {
+  gastos = [];
+
+  for (let g of lista){
+    let gastoRecuperado = new CrearGasto(
+      g.descripcion,
+      g.valor,
+      g.fecha,
+      ...(g.etiquetas || [])
+    );
+
+    gastoRecuperado.id = g.id;
+    gastos.push(gastoRecuperado);
+  }
+
+  cuenta = gastos.length > 0 ? Math.max(...gastos.map(g => g.id)) + 1 : 0;
+}
+
+
 // Exportación de funciones
 export {
   actualizarPresupuesto,
@@ -162,5 +181,6 @@ export {
   calcularBalance,
   filtrarGastos,
   agruparGastos,
+  cargarGastosDesdeLista,
 };
 

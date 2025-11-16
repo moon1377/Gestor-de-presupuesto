@@ -81,7 +81,7 @@ form.addEventListener("submit", function(evento) {
     let desc = evento.target.elements.descripcion.value;
     let valor = parseFloat(evento.target.elements.valor.value);
     let fecha = evento.target.elements.fecha.value;
-    let etiquetas = evento.target.elements.etiquetas.value.split(" ");
+    let etiquetas = evento.target.elements.etiquetas.value.split(",");
     console.log(etiquetas);
     let nuevoGasto = new gesGastos.CrearGasto(desc, valor, fecha, ...etiquetas);
     gesGastos.anyadirGasto(nuevoGasto);
@@ -92,7 +92,8 @@ divForm.append(form);
 
 class MiGasto extends HTMLElement {
     constructor() {
-	super();
+		super();
+		this.gasto = this.gasto;
     } // Llamamos al constructor de HTMLElement
 
     connectedCallback() {
@@ -156,6 +157,7 @@ class MiGasto extends HTMLElement {
 	    this.gasto.actualizarValor(Number(evento.target.elements.valor.value));
 	    this.gasto.actualizarFecha(evento.target.elements.fecha.value);
 	    this.gasto.etiquetas = evento.target.elements.etiquetas.value.split(",");
+		formEdicion.classList.add("oculto");
 	    
 	    pintarGastosWeb();
 	});
@@ -190,3 +192,39 @@ function pintarGastosWeb() {
 }
 
 pintarGastosWeb();
+
+
+// Guardar gastos en almacenamiento local
+document.getElementById("guardarGastos").addEventListener("click", function() {
+    // Obtener listado de gastos usando listarGastos
+    let listaGastos = gesGastos.listarGastos();
+    
+    // Convertir json para almacenamiento
+    let datosGuardar = JSON.stringify(listaGastos);
+    
+    // Guardar en almacenamiento local con clave "gastosGuardados"
+    localStorage.setItem("gastosGuardados", datosGuardar);
+    
+    alert("Gastos guardados correctamente");
+});
+
+// Recuperar gastos del almacenamiento local
+document.getElementById("recuperarGastos").addEventListener("click", function() {
+    // Recuperar datos del almacenamiento local
+    let datosRecuperados = localStorage.getItem("gastosGuardados");
+    
+    if (datosRecuperados) {
+        // convertir de JSON a array de objetos
+        let listaGastos = JSON.parse(datosRecuperados);
+        
+        // Cargar gastos usando cargarGastosDesdeLista
+        gesGastos.cargarGastosDesdeLista(listaGastos);
+        
+        // Actualizar la vista
+        pintarGastosWeb();
+        
+        alert("Gastos recuperados correctamente");
+    } else {
+        alert("No hay gastos guardados");
+    }
+});

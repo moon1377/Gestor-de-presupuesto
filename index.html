@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Gestor de presupuesto</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Gestor de presupuesto</title>
+		<link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
 	
         <template id="gastoPlantilla">
-	    <style>
-	     .oculto {
-		 display: none;
-		 }
-		 
-	    </style>
+			<style>
+	     		.oculto {
+				display: none;
+				}
+			
+			</style>
+
 
 
 	    <div class="gasto">
@@ -55,18 +57,15 @@
         </template>
 
 		
-	<div id="aplicacion">
-	    <div id="total">
+		<div id="aplicacion">
+			<button id="guardarGastos">Guardar gastos</button>
+			<button id="recuperarGastos">Recuperar gastos</button>
 
-	    </div>
-	    <div id="formcreacion">
+			<div id="total"></div>
+			<div id="formcreacion"></div>
+			<div id="listado"></div>
+		</div>
 
-	    </div>
-	    <div id="listado">
-
-	    </div>
-	</div>
-
-	<script type="module" src="./js/gestionPresupuestoWebV2.js"></script>
+		<script type="module" src="./js/gestionPresupuestoWebV2.js"></script>
     </body>
 </html>
